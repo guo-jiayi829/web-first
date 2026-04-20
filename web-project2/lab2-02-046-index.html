@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>图书商城</title>
+    <link rel="stylesheet" href="css/lab2-02-046-index.css">
+</head>
+<body>
+<!-- 头部：固定定位 + 浮动 -->
+<div class="header">
+    <div class="logo">
+        <img src="img/log.jpg" alt="Logo">
+    </div>
+    <ul class="nav">
+        <li>首页</li>
+        <li>文学小说</li>
+        <li>科技编程</li>
+        <li>人文历史</li>
+        <li>联系我们</li>
+    </ul>
+</div>
+
+<!-- 主体容器 -->
+<div class="container">
+    <!-- 左侧栏：相对定位 -->
+    <div class="left">
+        <div class="left-title">图书分类</div>
+        <ul>
+            <li>计算机图书</li>
+            <li>文学名著</li>
+            <li>少儿读物</li>
+            <li>考试考证</li>
+            <li>生活健康</li>
+        </ul>
+    </div>
+
+    <!-- 中间内容区 -->
+    <div class="middle">
+        <!-- 中间大图 -->
+        <div class="big-img">
+            <img src="img/datu.png.png" alt="中间大图">
+        </div>
+
+        <!-- 三张图书图片排成一排 -->
+        <div class="book-show">
+            <div class="book-item">
+                <img src="img/photo1.jpg" alt="图书">
+                <div class="hover-info">热销中</div>
+            </div>
+            <div class="book-item">
+                <img src="img/photo2.jpg" alt="图书">
+            </div>
+            <div class="book-item">
+                <img src="img/photo3.jpg" alt="图书">
+            </div>
+        </div>
+
+        <!-- 热门推荐 -->
+        <div class="hot-book">
+            <div class="hot-title">热门推荐</div>
+            <ul class="hot-list">
+                <li>Python编程</li>
+                <li>JavaScript高级</li>
+                <li>深度学习</li>
+            </ul>
+        </div>
+
+        <!-- 新书上市：表格 -->
+        <div class="new-book">
+            <div class="new-title">新书上市</div>
+            <table border="1">
+                <tr>
+                    <th>书名</th>
+                    <th>价格</th>
+                    <th>出版时间</th>
+                </tr>
+                <tr>
+                    <td>HTML从入门到精通</td>
+                    <td>59元</td>
+                    <td>2025-01</td>
+                </tr>
+                <tr>
+                    <td>CSS布局实战</td>
+                    <td>49元</td>
+                    <td>2025-02</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <!-- 右侧栏：固定定位 -->
+    <div class="right">
+        <div class="right-title">促销广告</div>
+        <ul>
+            <li>满100减20</li>
+            <li>新用户立减10元</li>
+            <li>会员享8折</li>
+        </ul>
+    </div>
+</div>
+
+</body>
+</html>
