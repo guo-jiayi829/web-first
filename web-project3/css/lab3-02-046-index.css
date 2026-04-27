@@ -1,0 +1,341 @@
+/* 全局初始化 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style: none;
+}
+
+body {
+    padding-top: 80px;
+}
+
+/* 头部：固定定位 */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 70px;
+    background: #2c3e50;
+    color: white;
+    padding: 0 20px;
+    border-bottom: 3px solid #3498db;
+    z-index: 999;
+}
+
+.logo {
+    float: left;
+    height: 70px;
+    line-height: 70px;
+}
+
+.logo img {
+    height: 50px;
+    vertical-align: middle;
+}
+
+.nav {
+    float: right;
+    height: 70px;
+    line-height: 70px;
+}
+
+.nav li {
+    float: left;
+    margin-left: 30px;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 0 10px;
+}
+
+.nav li:hover {
+    background: #3498db;
+    border-radius: 5px;
+}
+
+/* 主体容器 */
+.container {
+    width: 1200px;
+    margin: 20px auto;
+    overflow: hidden;
+}
+
+/* 左侧栏：相对定位 */
+.left {
+    width: 220px;
+    float: left;
+    position: relative;
+    padding: 15px;
+    border: 1px solid #ddd;
+    background: #f8f9fa;
+}
+
+.left-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.left ul li {
+    height: 35px;
+    line-height: 35px;
+    border-bottom: 1px dashed #ccc;
+    padding-left: 10px;
+    cursor: pointer;
+}
+
+.left ul li:hover {
+    background: #e3f2fd;
+    color: #3498db;
+}
+
+/* 中间内容区 */
+.middle {
+    width: 700px;
+    float: left;
+    margin: 0 30px;
+}
+
+/* 中间大图 */
+.big-img {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.big-img img {
+    width: 100%;
+    height: 260px;
+    display: block;
+    border: 1px solid #ddd;
+}
+
+/* 三张图片排成一排 */
+.book-show {
+    overflow: hidden;
+    margin-bottom: 30px;
+}
+
+.book-item {
+    width: 220px;
+    float: left;
+    margin-right: 20px;
+    border: 1px solid #ddd;
+    padding: 5px;
+    position: relative;
+}
+
+/* 最后一张图片去掉右边距 */
+.book-item:last-child {
+    margin-right: 0;
+}
+
+.book-item img {
+    width: 100%;
+    height: 240px;
+    display: block;
+}
+
+/* 鼠标悬停显示 */
+.hover-info {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: red;
+    color: white;
+    padding: 5px 8px;
+    display: none;
+}
+
+.book-item:hover .hover-info {
+    display: block;
+    cursor: pointer;
+}
+
+/* 热门推荐 */
+.hot-book {
+    margin-bottom: 30px;
+}
+
+.hot-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.hot-list li {
+    width: 220px;
+    float: left;
+    margin-right: 20px;
+    height: 40px;
+    line-height: 40px;
+    background: #f1f1f1;
+    text-align: center;
+    cursor: pointer;
+}
+
+.hot-list li:last-child {
+    margin-right: 0;
+}
+
+.hot-list li:hover {
+    background: #3498db;
+    color: white;
+}
+
+/* 表格 */
+.new-book {
+    clear: both;
+}
+
+.new-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+th, td {
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+
+th {
+    background: #f8f9fa;
+}
+
+/* 右侧栏：固定定位 */
+.right {
+    width: 200px;
+    position: fixed;
+    right: 50px;
+    top: 100px;
+    padding: 15px;
+    border: 1px solid #ff6b6b;
+    background: #fff5f5;
+}
+
+.right-title {
+    font-weight: bold;
+    color: #ff6b6b;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.right ul li {
+    height: 35px;
+    line-height: 35px;
+    text-align: center;
+    color: #d63031;
+    font-weight: bold;
+}
+
+/* 登录/注册弹窗样式 */
+.login-modal {
+    display: none; /* 默认隐藏 */
+    position: fixed; /* 固定定位 */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* 半透明遮罩 */
+    z-index: 1000; /* 层级高于header */
+}
+
+.modal-content {
+    position: absolute; /* 子绝 */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* 居中 */
+    width: 400px;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+}
+
+/* 关闭按钮 */
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 24px;
+    cursor: pointer;
+    color: #666;
+}
+.close-btn:hover {
+    color: #ff6b6b;
+}
+
+/* 切换标签 */
+.tab-switch {
+    display: flex;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #ddd;
+}
+.tab {
+    flex: 1;
+    text-align: center;
+    padding: 10px 0;
+    cursor: pointer;
+    font-size: 16px;
+}
+.tab.active {
+    color: #3498db;
+    border-bottom: 2px solid #3498db;
+    font-weight: bold;
+}
+
+/* 表单样式 */
+.form-item {
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+}
+.form-item label {
+    width: 80px;
+    font-size: 14px;
+}
+.form-item input {
+    flex: 1;
+    padding: 8px 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    outline: none;
+}
+.form-item input:focus {
+    border-color: #3498db;
+}
+
+/* 按钮样式 */
+#login-submit, #reg-submit {
+    width: 100%;
+    padding: 10px;
+    background: #3498db;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+#login-submit:hover, #reg-submit:hover {
+    background: #2980b9;
+}
+
+/* 提示文字 */
+.tip {
+    margin-top: 10px;
+    text-align: center;
+    font-size: 14px;
+}
+
+/* 注册面板默认隐藏 */
+.register-panel {
+    display: none;
+}

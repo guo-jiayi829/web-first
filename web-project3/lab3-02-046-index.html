@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>图书商城</title>
+    <link rel="stylesheet" href="css/lab2-02-046-index.css">
+</head>
+<body>
+
+<!-- 头部：固定定位 + 浮动 -->
+<div class="header">
+    <div class="logo">
+        <img src="img/log.jpg" alt="Logo">
+    </div>
+    <ul class="nav">
+        <li>首页</li>
+        <li>文学小说</li>
+        <li>科技编程</li>
+        <li>人文历史</li>
+        <li>联系我们</li>
+        <li id="loginBtn" style="cursor: pointer;">登录/注册</li>
+    </ul>
+</div>
+
+<!-- 新增：登录/注册弹窗 -->
+<div class="login-modal">
+    <div class="modal-content">
+        <!-- 关闭按钮 -->
+        <span class="close-btn">&times;</span>
+        
+        <!-- 切换标签 -->
+        <div class="tab-switch">
+            <span class="tab active" data-tab="login">登录</span>
+            <span class="tab" data-tab="register">注册</span>
+        </div>
+        
+        <!-- 登录面板 -->
+        <div class="panel login-panel">
+            <div class="form-item">
+                <label>用户名：</label>
+                <input type="text" id="login-username" placeholder="请输入用户名">
+            </div>
+            <div class="form-item">
+                <label>密码：</label>
+                <input type="password" id="login-password" placeholder="请输入密码">
+            </div>
+            <button id="login-submit">登录</button>
+            <p class="tip" id="login-tip"></p>
+        </div>
+        
+        <!-- 注册面板 -->
+        <div class="panel register-panel">
+            <div class="form-item">
+                <label>用户名：</label>
+                <input type="text" id="reg-username" placeholder="请输入用户名">
+            </div>
+            <div class="form-item">
+                <label>密码：</label>
+                <input type="password" id="reg-password" placeholder="请输入密码">
+            </div>
+            <button id="reg-submit">注册</button>
+            <p class="tip" id="reg-tip"></p>
+        </div>
+    </div>
+</div>
+
+<!-- 主体容器 -->
+<div class="container">
+    <!-- 左侧栏：相对定位 -->
+    <div class="left">
+        <div class="left-title">图书分类</div>
+        <ul>
+            <li>计算机图书</li>
+            <li>文学名著</li>
+            <li>少儿读物</li>
+            <li>考试考证</li>
+            <li>生活健康</li>
+        </ul>
+    </div>
+
+    <!-- 中间内容区 -->
+    <div class="middle">
+        <!-- 中间大图 -->
+        <div class="big-img">
+            <img src="img/datu.png.png" alt="中间大图">
+        </div>
+
+        <!-- 三张图书图片排成一排 -->
+        <div class="book-show">
+            <div class="book-item">
+                <img src="img/photo1.jpg" alt="图书">
+                <div class="hover-info">热销中</div>
+            </div>
+            <div class="book-item">
+                <img src="img/photo2.jpg" alt="图书">
+            </div>
+            <div class="book-item">
+                <img src="img/photo3.jpg" alt="图书">
+            </div>
+        </div>
+
+        <!-- 热门推荐 -->
+        <div class="hot-book">
+            <div class="hot-title">热门推荐</div>
+            <ul class="hot-list">
+                <li>Python编程</li>
+                <li>JavaScript高级</li>
+                <li>深度学习</li>
+            </ul>
+        </div>
+
+        <!-- 新书上市：表格 -->
+        <div class="new-book">
+            <div class="new-title">新书上市</div>
+            <table border="1">
+                <tr>
+                    <th>书名</th>
+                    <th>价格</th>
+                    <th>出版时间</th>
+                </tr>
+                <tr>
+                    <td>HTML从入门到精通</td>
+                    <td>59元</td>
+                    <td>2025-01</td>
+                </tr>
+                <tr>
+                    <td>CSS布局实战</td>
+                    <td>49元</td>
+                    <td>2025-02</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <!-- 右侧栏：固定定位 -->
+    <div class="right">
+        <div class="right-title">促销广告</div>
+        <ul>
+            <li>满100减20</li>
+            <li>新用户立减10元</li>
+            <li>会员享8折</li>
+        </ul>
+    </div>
+</div>
+
+<!-- 新增：JS 脚本 -->
+<script>
+    // 1. 获取DOM元素
+    const loginBtn = document.getElementById('loginBtn');
+    const loginModal = document.querySelector('.login-modal');
+    const closeBtn = document.querySelector('.close-btn');
+    const tabs = document.querySelectorAll('.tab');
+    const loginPanel = document.querySelector('.login-panel');
+    const registerPanel = document.querySelector('.register-panel');
+    const loginSubmit = document.getElementById('login-submit');
+    const regSubmit = document.getElementById('reg-submit');
+    const loginTip = document.getElementById('login-tip');
+    const regTip = document.getElementById('reg-tip');
+
+    // 2. 弹窗显示/隐藏
+    loginBtn.addEventListener('click', () => {
+        loginModal.style.display = 'block';
+    });
+    closeBtn.addEventListener('click', () => {
+        loginModal.style.display = 'none';
+        // 清空输入框和提示
+        clearInputAndTip();
+    });
+    // 点击弹窗外部关闭
+    window.addEventListener('click', (e) => {
+        if (e.target === loginModal) {
+            loginModal.style.display = 'none';
+            clearInputAndTip();
+        }
+    });
+
+    // 3. 切换登录/注册面板
+    tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            // 移除所有active
+            tabs.forEach(t => t.classList.remove('active'));
+            // 当前tab激活
+            tab.classList.add('active');
+            // 切换面板
+            if (tab.dataset.tab === 'login') {
+                loginPanel.style.display = 'block';
+                registerPanel.style.display = 'none';
+            } else {
+                loginPanel.style.display = 'none';
+                registerPanel.style.display = 'block';
+            }
+            // 清空提示
+            clearInputAndTip();
+        });
+    });
+
+    // 4. 注册逻辑
+    regSubmit.addEventListener('click', () => {
+        const username = document.getElementById('reg-username').value.trim();
+        const password = document.getElementById('reg-password').value.trim();
+        
+        // 非空验证
+        if (!username || !password) {
+            regTip.style.color = 'red';
+            regTip.textContent = '用户名和密码不能为空！';
+            return;
+        }
+
+        // 读取本地存储的用户信息
+        let users = JSON.parse(localStorage.getItem('bookStoreUsers')) || [];
+        // 检查用户名是否已存在
+        const isExist = users.some(user => user.username === username);
+        if (isExist) {
+            regTip.style.color = 'red';
+            regTip.textContent = '用户名已存在！';
+            return;
+        }
+
+        // 注册成功：存入本地存储
+        users.push({ username, password });
+        localStorage.setItem('bookStoreUsers', JSON.stringify(users));
+        regTip.style.color = 'green';
+        regTip.textContent = '注册成功！请登录';
+        // 清空输入框
+        document.getElementById('reg-username').value = '';
+        document.getElementById('reg-password').value = '';
+        // 自动切换到登录面板
+        setTimeout(() => {
+            tabs[0].click();
+        }, 1000);
+    });
+
+    // 5. 登录逻辑
+    loginSubmit.addEventListener('click', () => {
+        const username = document.getElementById('login-username').value.trim();
+        const password = document.getElementById('login-password').value.trim();
+        
+        // 非空验证
+        if (!username || !password) {
+            loginTip.style.color = 'red';
+            loginTip.textContent = '用户名和密码不能为空！';
+            return;
+        }
+
+        // 读取本地存储的用户信息
+        let users = JSON.parse(localStorage.getItem('bookStoreUsers')) || [];
+        // 验证账号密码
+        const user = users.find(user => user.username === username && user.password === password);
+        if (user) {
+            loginTip.style.color = 'green';
+            loginTip.textContent = '登录成功！';
+            // 存储当前登录用户
+            localStorage.setItem('currentUser', username);
+            // 关闭弹窗
+            setTimeout(() => {
+                loginModal.style.display = 'none';
+                clearInputAndTip();
+                // 更新登录按钮显示
+                loginBtn.textContent = `${username}`;
+                loginBtn.style.cursor = 'default';
+                loginBtn.removeEventListener('click', () => {
+                    loginModal.style.display = 'block';
+                });
+            }, 1000);
+        } else {
+            loginTip.style.color = 'red';
+            loginTip.textContent = '用户名或密码错误！';
+        }
+    });
+
+    // 辅助函数：清空输入框和提示
+    function clearInputAndTip() {
+        // 登录框
+        document.getElementById('login-username').value = '';
+        document.getElementById('login-password').value = '';
+        // 注册框
+        document.getElementById('reg-username').value = '';
+        document.getElementById('reg-password').value = '';
+        // 提示
+        loginTip.textContent = '';
+        regTip.textContent = '';
+    }
+
+    // 页面加载时检查是否已登录
+    window.onload = () => {
+        const currentUser = localStorage.getItem('currentUser');
+        if (currentUser) {
+            loginBtn.textContent = `欢迎：${currentUser}`;
+            loginBtn.style.cursor = 'default';
+            loginBtn.removeEventListener('click', () => {
+                loginModal.style.display = 'block';
+            });
+        }
+    };
+</script>
+
+</body>
+</html>
